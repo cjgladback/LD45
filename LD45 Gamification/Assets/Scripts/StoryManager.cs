@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using System;
 using Ink.Runtime;
 
 // This is a super bare bones example of how to play and display a ink story in Unity.
 public class StoryManager : MonoBehaviour
 {
+    public static event Action<Story> OnCreateStory;
 
     void Awake()
     {
@@ -18,6 +19,7 @@ public class StoryManager : MonoBehaviour
     void StartStory()
     {
         story = new Story(inkJSONAsset.text);
+        if (OnCreateStory != null) OnCreateStory(story);
         RefreshView();
     }
 
@@ -70,7 +72,7 @@ public class StoryManager : MonoBehaviour
         RefreshView();
     }
 
-    // Creates a button showing the choice text
+    // Creates a textbox showing the the line of text
     void CreateContentView(string text)
     {
         Text storyText = Instantiate(textPrefab) as Text;
