@@ -10,17 +10,37 @@ Not really sure how that makes sense when no one else is in here. It's not that 
 The breeze from the window behind you stirs the curtains and you very carefully don't think about reasons someone might have left through the window in the back of the house, leaving it unlocked and abandoning the house. You very carefully think "someone," not "Jim."
 -> look_around
 === look_around ===
-
+It's not a very large room. There can't be that many places to hide a key.
 + [Examine the desk.]->desk
++ [Examine the shelves by the couch.]->shelves_couch
++ [Start for the window.]->give_up
 
 === desk ===
 The desk really wants an exit strategy.
 -> END
 
+=== shelves_couch ===
+The bookshelves near the couch {hold the cream of the crop, to ensure that whenever Lilly joins her dad in here she'll have something enticing in view.|stare back at you.}
++ [Check low.] ->shelves_couch_low
++ [Look around some more.] ->look_around
+
+= shelves_couch_low
+Fricking third time writing this. And I'm tired, just getting the story out before morning.
+Lilly's favorite picture book is missing, which isn't a surprise since she's been using it to help herself and her brother get out of "moods." Caught the phrase from preschool. Declares herself in a mood when she's getting frustrated by something and spends time alone. Cheered her brother up with this book when he was crying while you were babysitting.
+Sometimes you wish you'd had a big sister like her, but as it is you're proud of both of these kids like they were your own younger siblings. And so help you if something's happened to them...
+There's nothing under the books. Or behind the books. Or able to be shaken out of the books.
+Frustrated, you take a step back and keep your hands carefully by your sides, clenched into fists.
+-> shelves_couch
+
+= shelves_couch_mid
+The whole reference section is conspicuously lacking dust in front of the books. The thesaurus especially is worn, the metallic edges flaked off around the corners from frequent use. You hoped to find a recess carved into the thicker tomes here, but the fact is Jim wouldn't be willing to risk facing life without the wisdom of every volume of The Books of Knowledge and An American Encyclopedia of Birds.
+That is, assuming you know the man at all.
+You check each book anyway. There's nothing.
+-> shelves_couch
+
 === give_up ===
-You consider hopping back out the window, sliding it closed, and pretending none of this happened.
-But you won't give up on these kids that easily. There has to be something you can do here.
-* {not its_locked} [Buck up.] ->its_locked
-* {its_locked} [Take a deep breath.] ->look_around
+{You consider hopping back out the window, sliding it closed, and pretending none of this happened. But y|Y}ou won't give up on these kids that easily. There has to be something you can do here.
++ {not its_locked} [Buck up.] ->its_locked
++ {its_locked} [Take a deep breath.] ->look_around
 
 -> END
