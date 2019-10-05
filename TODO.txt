@@ -1,0 +1,8 @@
+ToDo:
+Map clues
+Write story
+Integrate with UI
+Chop up story
+Make start screen
+Make scene
+Lighting scene
