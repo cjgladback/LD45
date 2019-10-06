@@ -17,6 +17,7 @@ public class InkTesting : MonoBehaviour
     {
         story = new Story(inkJSON.text);
 
+
         refreshUI();
 
     }
@@ -30,6 +31,7 @@ public class InkTesting : MonoBehaviour
         storyText.text = loadStoryChunk();
         storyText.transform.SetParent(this.transform, false);
 
+        /*
         foreach (Choice choice in story.currentChoices)
         {
             Button choiceButton = Instantiate(buttonPrefab) as Button;
@@ -43,12 +45,13 @@ public class InkTesting : MonoBehaviour
             });
 
         }
+        */
 
-        //Trying desperately to fix the choice order issue.
-        /*
+        //Trying desperately to fix the choice order issue. It's only effecting the text on the buttons and I don't understand!
+        
         for (int i = 0; i < story.currentChoices.Count; i++)
         {
-            new Text choice = story.currentChoices[i].text;
+            Choice choice = story.currentChoices[i];
             Button choiceButton = Instantiate(buttonPrefab) as Button;
             choiceButton.transform.SetParent(this.transform, false);
 
@@ -59,8 +62,9 @@ public class InkTesting : MonoBehaviour
                 chooseStoryChoice(choice);
             });
 
+            Debug.Log(i);
         }
-        */
+        
     }
 
     void eraseUI()
