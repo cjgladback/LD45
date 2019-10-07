@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class InkTesting : MonoBehaviour
 {
+    public string MainMenu;
+    
     public TextAsset inkJSON;
     private Story story;
 
@@ -24,26 +27,58 @@ public class InkTesting : MonoBehaviour
 
     void refreshUI()
     {
+                
+            eraseUI();
 
-        eraseUI();
+            Text storyText = Instantiate(textPrefab) as Text;
+            storyText.text = loadStoryChunk();
+            storyText.transform.SetParent(this.transform, false);
 
-        Text storyText = Instantiate(textPrefab) as Text;
-        storyText.text = loadStoryChunk();
-        storyText.transform.SetParent(this.transform, false);
 
-        
-        foreach (Choice choice in story.currentChoices)
+            foreach (Choice choice in story.currentChoices)
+            {
+                Button choiceButton = Instantiate(buttonPrefab) as Button;
+                choiceButton.transform.SetParent(this.transform, false);
+
+                Text choiceText = choiceButton.GetComponentInChildren<Text>();
+                choiceText.text = choice.text;
+
+                choiceButton.onClick.AddListener(delegate
+                {
+                    chooseStoryChoice(choice);
+                });
+            }
+
+        if (story.currentChoices.Count < 1)
         {
-            Button choiceButton = Instantiate(buttonPrefab) as Button;
-            choiceButton.transform.SetParent(this.transform, false);
+            eraseUI();
 
-            Text choiceText = choiceButton.GetComponentInChildren<Text>();
-            choiceText.text = choice.text;
+            Text endText = Instantiate(textPrefab) as Text;
+            endText.text = "The End";
+            endText.transform.SetParent(this.transform, false);
 
-            choiceButton.onClick.AddListener(delegate {
-                chooseStoryChoice(choice);
+
+            Button startButton = Instantiate(buttonPrefab) as Button;
+            startButton.transform.SetParent(this.transform, false);
+
+            Text startText = startButton.GetComponentInChildren<Text>();
+            startText.text = "Live it over?";
+
+            startButton.onClick.AddListener(delegate
+            {
+                Start();
             });
 
+            Button exitButton = Instantiate(buttonPrefab) as Button;
+            exitButton.transform.SetParent(this.transform, false);
+
+            Text exitText = exitButton.GetComponentInChildren<Text>();
+            exitText.text = "Leave this.";
+
+            exitButton.onClick.AddListener(delegate
+            {
+                SceneManager.LoadScene(MainMenu);
+            });
         }
         
 
